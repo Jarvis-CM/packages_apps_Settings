@@ -178,7 +178,9 @@ public class Settings extends PreferenceActivity
             R.id.lock_screen_settings,
             R.id.system_settings,
             R.id.privacy_settings_cyanogenmod,
-            R.id.button_settings
+            R.id.button_settings,
+            R.id.extended_section,
+            R.id.voice_control_settings
     };
 
     private SharedPreferences mDevelopmentPreferences;

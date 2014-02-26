@@ -94,6 +94,17 @@
         android:fragment="com.android.settings.cyanogenmod.SystemUiSettings"
         android:title="@string/system_settings_title" />
 
+    <!-- EXTENDED CONTROL -->
+    <header android:id="@+id/extended_section"
+        android:title="@string/header_category_extended_control" />
+
+    <!-- Voice Control -->
+    <header
+        android:id="@+id/voice_control_settings"
+        android:icon="@drawable/ic_settings_sound"
+        android:fragment="com.android.settings.extended.VoiceControlSettings"
+        android:title="@string/voice_control_settings" />
+
     <!-- DEVICE -->
     <header android:id="@+id/device_section"
         android:title="@string/header_category_device" />

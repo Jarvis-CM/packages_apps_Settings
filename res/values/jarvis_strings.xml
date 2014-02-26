@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2014 Firtecy
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="header_category_extended_control">EXTENDED CONTROL</string>
+
+    <string name="title_shake_threshold">Shake Threshold</string>
+    <string name="summary_shake_threshold">Set the threshold to activate listening</string>
+    <string name="description_shake_threshold">Set the shake threshold in percent to activate listening or 0% to disable it</string>
+
+    <string name="voice_control_settings">Voice Control</string>
+    <string name="voice_control_selection">Voice Control Service</string>
+
+    <!-- Voice Control application selection - uninstall button [CHAR LIMIT=80] -->
+    <string name="voice_control_app_uninstall_button">Uninstall this application</string>
+
+    <string name="title_disable_voice">Disable Voice Control</string>
+
+    <string name="category_listen_modes">Listen modes</string>
+
+    <string name="title_listen_screen_on">When screen is on</string>
+    <string name="summary_listen_screen_on">Enables the listening when the screen is on</string>
+
+    <string name="title_listen_plugged_in">When plugged in</string>
+    <string name="summary_listen_plugged_in">Enables the listening when a power supply is connected</string>
+
+    <string name="title_listen_everytime">Everytime</string>
+    <string name="summary_listen_everytime">Enables the listening everytime. Independent of power state or screen state</string>
+</resources>
