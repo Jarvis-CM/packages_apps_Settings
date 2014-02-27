@@ -20,8 +20,8 @@
 
     <CheckBoxPreference
         android:key="disable_voice"
-        android:title="@string/title_disable_voice"
-        android:defaultValue="false" />
+        android:title="@string/title_enable_voice"
+        android:defaultValue="true" />
   
     <PreferenceScreen
         android:key="service_app_selection"

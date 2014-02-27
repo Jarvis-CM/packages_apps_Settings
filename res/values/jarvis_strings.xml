@@ -26,7 +26,7 @@
     <!-- Voice Control application selection - uninstall button [CHAR LIMIT=80] -->
     <string name="voice_control_app_uninstall_button">Uninstall this application</string>
 
-    <string name="title_disable_voice">Disable Voice Control</string>
+    <string name="title_enable_voice">Enable Voice Control</string>
 
     <string name="category_listen_modes">Listen modes</string>
 
