@@ -101,7 +101,7 @@
     <!-- Voice Control -->
     <header
         android:id="@+id/voice_control_settings"
-        android:icon="@drawable/ic_settings_sound"
+        android:icon="@drawable/ic_settings_voice"
         android:fragment="com.android.settings.extended.VoiceControlSettings"
         android:title="@string/voice_control_settings" />
 
