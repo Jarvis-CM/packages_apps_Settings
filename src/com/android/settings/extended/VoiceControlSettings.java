@@ -81,7 +81,7 @@ public class VoiceControlSettings extends SettingsPreferenceFragment implements
         
         mVoiceEnabledValue = Settings.System.getIntForUser(getContentResolver(),
                 Settings.System.JARVIS_SERVICE_LISTEN_LOCK,
-                1, ActivityManager.getCurrentUser()) == 2;
+                1, ActivityManager.getCurrentUser()) < 2;
         
         mListenSOnPref = (CheckBoxPreference) findPreference(KEY_LISTEN_SCREEN_ON);
         mListenSOnPref.setChecked((mCurrentListenValue & 1) > 0);
@@ -116,9 +116,14 @@ public class VoiceControlSettings extends SettingsPreferenceFragment implements
     }
     
     private void saveEnabledState() {
+        int value = 0;
+        
+        if(mCurrentListenValue < 3)
+            value = mVoiceEnabledValue ? 1 : 2;
+        
         Settings.System.putIntForUser(getContentResolver(),
                 Settings.System.JARVIS_SERVICE_LISTEN_LOCK,
-                mVoiceEnabledValue ? 2 : 0, ActivityManager.getCurrentUser());
+                value, ActivityManager.getCurrentUser());
     }
     
     @Override
