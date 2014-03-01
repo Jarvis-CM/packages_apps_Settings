@@ -55,6 +55,8 @@ public class VoiceControlSettings extends SettingsPreferenceFragment implements
     private int mCurrentListenValue;
     private boolean mVoiceEnabledValue;
     
+    private boolean mInitBlock;
+    
     public VoiceControlSettings() {
         super();
     }
@@ -65,14 +67,7 @@ public class VoiceControlSettings extends SettingsPreferenceFragment implements
 
         addPreferencesFromResource(R.xml.voice_control_settings);
         
-        mVoiceEnabledPref = (CheckBoxPreference) findPreference(KEY_DISABLE_VOICE);
-        mVoiceEnabledPref.setOnPreferenceChangeListener(this);
-        
-        mServiceSelectionPref = findPreference(KEY_SERVICE_APP_SELECTION);
-        
-        mShakeThresholdPref = (ShakeThresholdDialogPreference) findPreference(KEY_SHAKE_THRESHOLD);
-        mShakeThresholdPref.setOnPreferenceChangeListener(this);
-        mShakeThresholdPref.setOnPreferenceClickListener(this);
+        mInitBlock = true;
         
         //Now the listen modes
         mCurrentListenValue = Settings.System.getIntForUser(getContentResolver(),
@@ -80,8 +75,18 @@ public class VoiceControlSettings extends SettingsPreferenceFragment implements
                 3, ActivityManager.getCurrentUser());
         
         mVoiceEnabledValue = Settings.System.getIntForUser(getContentResolver(),
-                Settings.System.JARVIS_SERVICE_LISTEN_LOCK,
-                1, ActivityManager.getCurrentUser()) < 2;
+                Settings.System.JARVIS_SERVICE_LISTEN_ENABLED,
+                1, ActivityManager.getCurrentUser()) == 1;
+        
+        mVoiceEnabledPref = (CheckBoxPreference) findPreference(KEY_DISABLE_VOICE);
+        mVoiceEnabledPref.setChecked(mVoiceEnabledValue);
+        mVoiceEnabledPref.setOnPreferenceChangeListener(this);
+        
+        mServiceSelectionPref = findPreference(KEY_SERVICE_APP_SELECTION);
+        
+        mShakeThresholdPref = (ShakeThresholdDialogPreference) findPreference(KEY_SHAKE_THRESHOLD);
+        mShakeThresholdPref.setOnPreferenceChangeListener(this);
+        mShakeThresholdPref.setOnPreferenceClickListener(this);
         
         mListenSOnPref = (CheckBoxPreference) findPreference(KEY_LISTEN_SCREEN_ON);
         mListenSOnPref.setChecked((mCurrentListenValue & 1) > 0);
@@ -94,6 +99,8 @@ public class VoiceControlSettings extends SettingsPreferenceFragment implements
         mListenETiPref = (CheckBoxPreference) findPreference(KEY_LISTEN_EVERYTIME);
         mListenETiPref.setChecked((mCurrentListenValue & 4) > 0);
         mListenETiPref.setOnPreferenceChangeListener(this);
+        
+        mInitBlock = false;
         
         resetListenModes();
     }
@@ -115,19 +122,17 @@ public class VoiceControlSettings extends SettingsPreferenceFragment implements
                 mCurrentListenValue, ActivityManager.getCurrentUser());
     }
     
-    private void saveEnabledState() {
-        int value = 0;
-        
-        if(mCurrentListenValue < 3)
-            value = mVoiceEnabledValue ? 1 : 2;
-        
+    private void saveEnabledState() {    
         Settings.System.putIntForUser(getContentResolver(),
-                Settings.System.JARVIS_SERVICE_LISTEN_LOCK,
-                value, ActivityManager.getCurrentUser());
+                Settings.System.JARVIS_SERVICE_LISTEN_ENABLED,
+                mVoiceEnabledValue ? 1 : 0, ActivityManager.getCurrentUser());
     }
     
     @Override
     public boolean onPreferenceChange(Preference preference, Object objValue) {
+        if(mInitBlock)
+            return true;
+        
         final String key = preference.getKey();
         if (KEY_DISABLE_VOICE.equals(key)) {
             mVoiceEnabledValue = ((Boolean)objValue).booleanValue();
